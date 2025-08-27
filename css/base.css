@@ -1,0 +1,50 @@
+/* base.css - Common styles for all pages */
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9; /* A light, clean background */
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+button {
+    display: inline-block;
+    background-color: #3498db; /* A nice blue */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9; /* A darker blue on hover */
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
