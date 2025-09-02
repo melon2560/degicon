@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'assets/Bandai Bridge/Bandai_bridge_1st_around_1900.png',
                 'assets/Bandai Bridge/Bandaibashi-Bridge_20130929.jpg'
             ],
-            labels: ['初代', '現代'],
+            labels: ['過去', '現代'],
             trivia: {
                 title: '萬代橋 (ばんだいばし)',
                 text: '新潟市の中心部を流れる信濃川に架かる、街のシンボル。現在の橋は1929年に完成した三代目で、美しい連続するアーチが特徴。国の重要文化財にも指定されています。'
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'assets/Niigata Station/Niigata_Station_in_the_Pre-war_Showa_era.jpg',
                 'assets/Niigata Station/JR_Niigata_Station_South_Exit.jpg'
             ],
-            labels: ['大正', '昭和', '現代'],
+            labels: ['過去', '昭和', '現代'],
             trivia: {
                 title: '新潟駅 (にいがたえき)',
                 text: '新潟県の県庁所在地、新潟市の中央駅。初代の駅舎は1897年に開業。現在の駅舎は、高架化工事などを経て進化を続けており、新潟の陸の玄関口として多くの人に利用されています。'
