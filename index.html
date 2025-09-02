@@ -5,12 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Niigata SHINKA</title>
     <link rel="stylesheet" href="css/base.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #1a202c, #2d3748, #ffffff, #f7fafc); /* New gradient */
+            position: relative; /* Keep for main-content z-index */
+            z-index: 1; /* Keep for main-content z-index */
+        }
+
+        .main-content {
+            position: relative; /* Above overlay */
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Full viewport height */
+            text-align: center;
+            color: white; /* Keep text white for dark side */
+            padding: 1rem;
+        }
+        .main-title {
+            font-size: 4rem; /* text-5xl */
+            font-weight: bold;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em; /* tracking-wide */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .tagline {
+            font-size: 1.5rem; /* text-2xl */
+            margin-bottom: 3rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        .button-group {
+            display: flex;
+            gap: 1.5rem; /* space-x-6 */
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            border: 2px solid white;
+            color: white;
+            font-weight: bold;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            text-decoration: none; /* Remove underline from <a> */
+        }
+        .action-button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Niigata SHINKA</h1>
-        <a href="deepen.html"><button>深化（街の記憶）</button></a>
-        <a href="evolve.html"><button>進化（祭りの迫力）</button></a>
+<body class="flex items-center justify-center min-h-screen text-gray-200 overflow-x-hidden">
+    <div class="main-content">
+        <h1 class="main-title">Niigata SHINKA</h1>
+        <p class="tagline">新潟の過去・現在・未来を巡る旅</p>
+        <div class="button-group">
+            <a href="deepen.html" class="action-button">深化（街の記憶）</a>
+            <a href="evolve.html" class="action-button">進化（祭りの迫力）</a>
+        </div>
     </div>
 </body>
 </html>
