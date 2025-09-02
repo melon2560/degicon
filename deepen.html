@@ -5,41 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新潟タイムスライダー</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #time-travel-viewer {
+            position: relative;
+            min-height: 620px; /* 高さを確保してガタつきを防ぐ */
+        }
+
+        #image-container,
+        #trivia-card {
+            position: absolute;
+            top: 50%; /* 上下中央揃えの基準 */
+            left: 50%;
+            /* アニメーションを滑らかに */
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- 初期状態 --- */
+        #image-container {
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        #trivia-card {
+            /* 画像とほぼ同じ位置に透明な状態で待機 */
+            transform: translate(-50%, -50%) scale(0.95);
+            opacity: 0;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        /* --- キャプション表示時の最終状態 --- */
+        #time-travel-viewer.caption-is-visible #image-container {
+            /* 画像を左へスライド（移動距離を短く） */
+            transform: translate(-80%, -50%);
+        }
+
+        #time-travel-viewer.caption-is-visible #trivia-card {
+            /* キャプションを右へスライドして表示 */
+            transform: translate(55%, -50%) scale(1);
+            opacity: 1;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center min-h-screen text-gray-200">
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center min-h-screen text-gray-200 overflow-x-hidden">
 
     <main class="w-full max-w-6xl p-4">
         <h1 class="text-2xl md:text-3xl font-bold text-center text-white mb-8 tracking-wide">新潟の景色を、指一本で“シンカ”。</h1>
 
-        <!-- メインコンテンツエリア (常に2カラムレイアウト) -->
-        <div id="time-travel-viewer" class="w-full grid md:grid-cols-2 gap-8 items-center">
-            
-            <!-- 画像コンテナ -->
-            <div id="image-container" class="transition-all duration-500 ease-in-out">
-                <img id="main-photo" class="rounded-lg shadow-xl mx-auto" src="https://placehold.co/800x600/cccccc/ffffff?text=現代の新潟" alt="新潟の風景">
+        <div id="time-travel-viewer">
+            <div id="image-container">
+                <img id="main-photo" class="rounded-lg shadow-xl" src="https://placehold.co/800x600/cccccc/ffffff?text=現代の新潟" alt="新潟の風景">
             </div>
-
-            <!-- 豆知識カード (レイアウトには常に存在) -->
-            <div id="trivia-card" class="w-full md:w-auto p-6 bg-slate-800/50 backdrop-blur-sm rounded-lg opacity-0 scale-95 transition-all duration-500 ease-in-out">
-                <h3 class="text-xl font-bold text-white mb-3">萬代橋 (ばんだいばし)</h3>
-                <p class="text-gray-300 leading-relaxed">
-                    新潟市の中心部を流れる信濃川に架かる、街のシンボル。現在の橋は1929年に完成した三代目で、美しい連続するアーチが特徴。
-                </p>
-                <p class="text-gray-300 leading-relaxed mt-3">
-                    国の重要文化財にも指定されており、その頑丈な作りは新潟地震にも耐え抜いた。市民の生活路としてだけでなく、新潟の歴史を見守り続けてきた存在である。
-                </p>
+            <div id="trivia-card">
+                <div class="p-6 bg-slate-800/50 backdrop-blur-sm rounded-lg">
+                    <h3 class="text-xl font-bold text-white mb-3">萬代橋 (ばんだいばし)</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        新潟市の中心部を流れる信濃川に架かる、街のシンボル。現在の橋は1929年に完成した三代目で、美しい連続するアーチが特徴。
+                    </p>
+                    <p class="text-gray-300 leading-relaxed mt-3">
+                        国の重要文化財にも指定されており、その頑丈な作りは新潟地震にも耐え抜いた。市民の生活路としてだけでなく、新潟の歴史を見守り続けてきた存在である。
+                    </p>
+                </div>
             </div>
-
         </div>
 
-        <!-- タイムスライダー -->
-        <div class="slider-container w-full md:w-1/2 mx-auto mt-8 flex items-center gap-4">
+        <div class="slider-container w-full md:w-1/2 mx-auto mt-12 flex items-center gap-4">
             <span class="text-gray-400">昔</span>
             <input type="range" id="time-slider" min="0" max="100" value="100" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-teal-400">
             <span class="text-gray-400">今</span>
         </div>
 
-        <!-- 戻るボタン -->
         <div class="text-center mt-12">
             <a href="index.html" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105">
                 タイトルに戻る
