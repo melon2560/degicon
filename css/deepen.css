@@ -1,0 +1,104 @@
+        #time-travel-viewer {
+            position: relative;
+            min-height: 620px; /* 高さを確保してガタつきを防ぐ */
+        }
+
+        #image-container,
+        #trivia-card {
+            position: absolute;
+            top: 50%; /* 上下中央揃えの基準 */
+            left: 50%;
+            /* アニメーションを滑らかに */
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #image-container {
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 800 / 600;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-xl */
+            overflow: hidden; /* Make sure border-radius clips the images */
+        }
+
+        #image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #trivia-card {
+            transform: translate(-50%, -50%) scale(0.95);
+            opacity: 0;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        #time-travel-viewer.caption-is-visible #image-container {
+            transform: translate(-80%, -50%);
+        }
+
+        #time-travel-viewer.caption-is-visible #trivia-card {
+            transform: translate(55%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* --- New Styles --- */
+        .hidden {
+            display: none;
+        }
+        .location-card {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            border-radius: 0.75rem; /* rounded-xl */
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+        }
+        .location-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.35);
+        }
+        .card-bg-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .location-card:hover .card-bg-image {
+            transform: scale(1.1);
+        }
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%);
+        }
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        .card-button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.25rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            border-radius: 9999px; /* rounded-full */
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .card-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+            color: black;
+        }

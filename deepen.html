@@ -5,97 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新潟タイムスライダー</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        #time-travel-viewer {
-            position: relative;
-            min-height: 620px; /* 高さを確保してガタつきを防ぐ */
-        }
-
-        #image-container,
-        #trivia-card {
-            position: absolute;
-            top: 50%; /* 上下中央揃えの基準 */
-            left: 50%;
-            /* アニメーションを滑らかに */
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* --- 初期状態 --- */
-        #image-container {
-            transform: translate(-50%, -50%);
-            width: 100%;
-            max-width: 800px;
-            aspect-ratio: 800 / 600;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-xl */
-            overflow: hidden; /* Make sure border-radius clips the images */
-        }
-
-        #image-container img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-        }
-
-        #trivia-card {
-            /* 画像とほぼ同じ位置に透明な状態で待機 */
-            transform: translate(-50%, -50%) scale(0.95);
-            opacity: 0;
-            width: 100%;
-            max-width: 340px;
-        }
-
-        /* --- キャプション表示時の最終状態 --- */
-        #time-travel-viewer.caption-is-visible #image-container {
-            /* 画像を左へスライド（移動距離を短く） */
-            transform: translate(-80%, -50%);
-        }
-
-        #time-travel-viewer.caption-is-visible #trivia-card {
-            /* キャプションを右へスライドして表示 */
-            transform: translate(55%, -50%) scale(1);
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="css/deepen.css">
 </head>
 <body class="bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center min-h-screen text-gray-200 overflow-x-hidden">
 
-    <main class="w-full max-w-6xl p-4">
-        <h1 class="text-2xl md:text-3xl font-bold text-center text-white mb-8 tracking-wide">新潟の景色を、指一本で“シンカ”。</h1>
+<main class="w-full max-w-6xl p-4">
+
+    <!-- View 1: Selection Screen (Visible by default) -->
+    <div id="selection-screen">
+        <h1 class="text-2xl md:text-4xl font-bold text-center text-white mb-12 tracking-wider">場所を選択</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Card 1: Bandai Bridge -->
+            <div class="location-card" data-location="bandai">
+                <img src="assets/Bandai Bridge/Bandaibashi-Bridge_20130929.jpg" class="card-bg-image" alt="萬代橋">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold">萬代橋</h2>
+                    <button class="card-button">この場所を見る</button>
+                </div>
+            </div>
+            <!-- Card 2: Niigata Station -->
+            <div class="location-card" data-location="niigata">
+                <img src="assets/Niigata Station/JR_Niigata_Station_South_Exit.jpg" class="card-bg-image" alt="新潟駅">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h2 class="text-3xl font-bold">新潟駅</h2>
+                    <button class="card-button">この場所を見る</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="index.html" class="inline-block bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105">
+                スタート画面に戻る
+            </a>
+        </div>
+    </div>
+
+    <!-- View 2: Slider View (Hidden by default) -->
+    <div id="slider-view" class="hidden">
+        <h1 id="location-title" class="text-2xl md:text-3xl font-bold text-center text-white mb-8 tracking-wide"></h1>
 
         <div id="time-travel-viewer">
             <div id="image-container">
-            <img id="old-photo" src="assets/Bandai Bridge/Bandai_bridge_1st_around_1900.png" alt="昔の新潟の風景">
-            <img id="modern-photo" src="assets/Bandai Bridge/Bandaibashi-Bridge_20130929.jpg" alt="現代の新潟の風景">
-        </div>
+                <img id="bottom-image" alt="風景">
+                <img id="top-image" alt="風景">
+            </div>
             <div id="trivia-card">
                 <div class="p-6 bg-slate-800/50 backdrop-blur-sm rounded-lg">
-                    <h3 class="text-xl font-bold text-white mb-3">萬代橋 (ばんだいばし)</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        新潟市の中心部を流れる信濃川に架かる、街のシンボル。現在の橋は1929年に完成した三代目で、美しい連続するアーチが特徴。
-                    </p>
-                    <p class="text-gray-300 leading-relaxed mt-3">
-                        国の重要文化財にも指定されており、その頑丈な作りは新潟地震にも耐え抜いた。市民の生活路としてだけでなく、新潟の歴史を見守り続けてきた存在である。
-                    </p>
+                    <h3 id="trivia-title" class="text-xl font-bold text-white mb-3"></h3>
+                    <p id="trivia-text" class="text-gray-300 leading-relaxed"></p>
                 </div>
             </div>
         </div>
 
         <div class="slider-container w-full md:w-1/2 mx-auto mt-12 flex items-center gap-4">
-            <span class="text-gray-400">昔</span>
-            <input type="range" id="time-slider" min="0" max="100" value="100" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-teal-400">
-            <span class="text-gray-400">今</span>
+            <span id="slider-label-start" class="text-gray-400">昔</span>
+            <input type="range" id="time-slider" min="0" max="1" value="1" step="0.01" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-teal-400">
+            <span id="slider-label-end" class="text-gray-400">今</span>
         </div>
 
         <div class="text-center mt-12">
-            <a href="index.html" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105">
-                タイトルに戻る
-            </a>
+            <button id="back-button" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105">
+                場所の選択に戻る
+            </button>
         </div>
-    </main>
+    </div>
+
+</main>
 
     <script src="js/deepen.js"></script>
 </body>
