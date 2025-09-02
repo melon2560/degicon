@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
         niigataFestival: {
             title: '新潟祭り',
             images: [
-                'assets/Festival/Niigata-Matsuri_20130809-05.jpg' ,// Oldest
-                'assets/Festival/Generated Image September 02, 2025 - 10_06AM.jpg'// Newest
+                'assets/Festival/Generated Image September 02, 2025 - 10_06AM.jpg', // Newest
+                'assets/Festival/Niigata-Matsuri_20130809-05.jpg' // Oldest
+                
             ],
-            labels: ['現代', '過去'], // Newest, Oldest
+            labels: ['過去', '現代'], // Oldest, Newest
             trivia: {
                 title: '新潟祭り (にいがたまつり)',
                 text: '毎年8月上旬に開催される新潟市最大の祭り。大民謡流し、住吉行列、花火大会など、様々なイベントが行われ、街全体が活気に満ち溢れます。'
@@ -16,10 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
         fireworks: {
             title: '花火',
             images: [
-                'assets/Fireworks/Everlasting_Fireworks_looped.gif', // Newest
-                'assets/Fireworks/Famous_Places_of_Edo_(Fireworks_at_Ryogoku),_by_Utagawa_Hiroshige,_Japan,_Edo_period,_1800s_AD,_woodblock_print_on_paper_-_Tokyo_National_Museum_-_Tokyo,_Japan_-_DSC09279.jpg' // Oldest
+                'assets/Fireworks/Famous_Places_of_Edo_(Fireworks_at_Ryogoku),_by_Utagawa_Hiroshige,_Japan,_Edo_period,_1800s_AD,_woodblock_print_on_paper_-_Tokyo_National_Museum_-_Tokyo,_Japan_-_DSC09279.jpg', // Oldest
+                'assets/Fireworks/Everlasting_Fireworks_looped.gif' // Newest
             ],
-            labels: ['現代', '過去'], // Newest, Oldest
+            labels: ['過去', '現代'], // Oldest, Newest
             trivia: {
                 title: '花火 (はなび)',
                 text: '日本の夏の風物詩である花火。古くは江戸時代から庶民に親しまれ、浮世絵にも描かれてきました。現代では、技術の進化により、より大規模で芸術的な花火大会が各地で開催されています。'
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         triviaText.textContent = locationData.trivia.text;
 
         timeSlider.max = imageCount - 1;
-        timeSlider.value = imageCount - 1; // Start at the oldest image (rightmost)
+        timeSlider.value = 0; // Start at the oldest image (leftmost)
         timeSlider.step = 0.01; // Use a small step for smooth transition
 
         sliderLabelStart.textContent = locationData.labels[0];
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         topImage.style.opacity = progress;
 
         // Toggle trivia card visibility
-        const isCaptionVisible = sliderValue < (currentImages.length - 1) * 0.8;
+        const isCaptionVisible = sliderValue > 0.2; // Caption visible after moving slightly from the start
         timeTravelViewer.classList.toggle('caption-is-visible', isCaptionVisible);
     }
 
