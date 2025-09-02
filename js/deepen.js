@@ -1,25 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const timeSlider = document.getElementById('time-slider');
-    const mainPhoto = document.getElementById('main-photo');
-    const timeViewer = document.getElementById('time-travel-viewer');
+    const slider = document.getElementById('time-slider');
+    const modernPhoto = document.getElementById('modern-photo'); // Get the top image
+    const viewer = document.getElementById('time-travel-viewer');
 
     const handleSliderInput = () => {
-        const value = timeSlider.value;
+        const value = slider.value;
 
-        // 1. 画像のフィルターを更新
-        if (value > 80) {
-            mainPhoto.style.filter = 'none';
-        } else if (value > 30) {
-            mainPhoto.style.filter = 'sepia(1)';
-        } else {
-            mainPhoto.style.filter = 'grayscale(1) contrast(1.1) brightness(0.95)';
-        }
+        // 1. Control opacity of the top image for crossfade
+        // slider value 100 -> opacity 1. slider value 0 -> opacity 0.
+        modernPhoto.style.opacity = value / 100;
 
-        // 2. 親要素にクラスを付け外しして、CSSアニメーションを起動
-        const isCaptionVisible = value <= 70;
-        timeViewer.classList.toggle('caption-is-visible', isCaptionVisible);
+        // 2. Toggle caption visibility (same logic as before)
+        viewer.classList.toggle('caption-is-visible', value <= 70);
     };
 
-    timeSlider.addEventListener('input', handleSliderInput);
-    handleSliderInput(); // 初期表示
+    // Initialize the component state on load
+    handleSliderInput();
+
+    // Add the event listener
+    slider.addEventListener('input', handleSliderInput);
 });

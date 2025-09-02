@@ -25,6 +25,19 @@
             transform: translate(-50%, -50%);
             width: 100%;
             max-width: 800px;
+            aspect-ratio: 800 / 600;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-xl */
+            overflow: hidden; /* Make sure border-radius clips the images */
+        }
+
+        #image-container img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
         }
 
         #trivia-card {
@@ -55,8 +68,9 @@
 
         <div id="time-travel-viewer">
             <div id="image-container">
-                <img id="main-photo" class="rounded-lg shadow-xl" src="https://placehold.co/800x600/cccccc/ffffff?text=現代の新潟" alt="新潟の風景">
-            </div>
+            <img id="old-photo" src="assets/Bandai Bridge/Bandai_bridge_1st_around_1900.png" alt="昔の新潟の風景">
+            <img id="modern-photo" src="assets/Bandai Bridge/Bandaibashi-Bridge_20130929.jpg" alt="現代の新潟の風景">
+        </div>
             <div id="trivia-card">
                 <div class="p-6 bg-slate-800/50 backdrop-blur-sm rounded-lg">
                     <h3 class="text-xl font-bold text-white mb-3">萬代橋 (ばんだいばし)</h3>
