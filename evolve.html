@@ -5,167 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>進化（祭りの迫力） - Niigata SHINKA</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/evolve.css"> <!-- Keep this for now, might be used for base styles -->
+    <link rel="stylesheet" href="css/evolve.css?v=1.1"> <!-- Keep this for now, might be used for base styles -->
     <script src="https://cdn.tailwindcss.com"></script> <!-- Added Tailwind CDN -->
-    <style>
-        body {
-            background: linear-gradient(to bottom right, #ffffff, #f0f0f0, #e0e0e0); /* White-based gradient */
-            color: #333; /* Dark text for light background */
-        }
-        /* Adapt existing styles for white-based theme */
-        #time-travel-viewer {
-            position: relative;
-            min-height: 620px;
-        }
-
-        #image-container,
-        #trivia-card {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #image-container {
-            transform: translate(-50%, -50%);
-            width: 100%;
-            max-width: 800px;
-            aspect-ratio: 800 / 600;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05); /* Lighter shadow */
-            overflow: hidden;
-        }
-
-        #image-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        #trivia-card {
-            transform: translate(-50%, -50%) scale(0.95);
-            opacity: 0;
-            width: 100%;
-            max-width: 340px;
-            background: rgba(255, 255, 255, 0.7); /* Lighter background */
-            color: #333; /* Dark text */
-        }
-
-        #time-travel-viewer.caption-is-visible #image-container {
-            transform: translate(-80%, -50%);
-        }
-
-        #time-travel-viewer.caption-is-visible #trivia-card {
-            transform: translate(55%, -50%) scale(1);
-            opacity: 1;
-        }
-
-        /* --- New Styles (adapted for white theme) --- */
-        .hidden {
-            display: none;
-        }
-        .location-card {
-            position: relative;
-            aspect-ratio: 16 / 10;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05); /* Lighter shadow */
-            border: 2px solid transparent; /* For hover effect */
-        }
-        .location-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); /* Lighter shadow */
-            border-color: #333; /* Dark border on hover */
-        }
-        .card-bg-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .location-card:hover .card-bg-image {
-            transform: scale(1.1);
-        }
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 50%); /* Darker overlay for light background */
-        }
-        .card-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            color: white; /* Keep white text on card for contrast */
-            text-align: center;
-        }
-        .card-content h2 {
-            color: white; /* Ensure h2 inside card-content is white */
-        }
-        .card-button {
-            margin-top: 1rem;
-            padding: 0.5rem 1.25rem;
-            background-color: white; /* White background */
-            border: 1px solid #333; /* Dark border */
-            color: #333; /* Dark text */
-            border-radius: 9999px;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-        .card-button:hover {
-            background-color: #f0f0f0; /* Light gray on hover */
-            border-color: #333; /* Dark border on hover */
-            color: #333; /* Dark text on hover */
-        }
-        /* Titles */
-        h1, h3 {
-            color: #333; /* Dark text */
-            text-shadow: none; /* Remove text shadow */
-        }
-        h1 {
-            position: relative;
-            padding-bottom: 0.5rem; /* Space for underline */
-        }
-        /* Removed h1::after rule */
-        
-        /* Slider labels */
-        .slider-container span {
-            color: #333; /* Dark text */
-        }
-        /* Slider track */
-        .slider-container input[type="range"] {
-            background-color: #ccc; /* Light gray track */
-        }
-        /* Slider thumb */
-        .slider-container input[type="range"]::-webkit-slider-thumb {
-            background-color: #333; /* Dark thumb */
-        }
-        .slider-container input[type="range"]::-moz-range-thumb {
-            background-color: #333; /* Dark thumb */
-        }
-        .slider-container input[type="range"]::-ms-thumb {
-            background-color: #333; /* Dark thumb */
-        }
-        /* Back button */
-        #back-button {
-            background-color: white; /* White background */
-            border: 1px solid #333; /* Dark border */
-            color: #333; /* Dark text */
-        }
-        #back-button:hover {
-            background-color: #f0f0f0; /* Light gray on hover */
-            border-color: #333; /* Dark border on hover */
-            color: #333; /* Dark text on hover */
-        }
-    </style>
+    
 </head>
 <body class="flex items-center justify-center min-h-screen overflow-x-hidden">
 
@@ -221,7 +63,7 @@
 
         <div class="slider-container w-full md:w-1/2 mx-auto mt-12 flex items-center gap-4">
             <span id="slider-label-start"></span>
-            <input type="range" id="time-slider" min="0" max="1" value="0" step="0.01" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+            <input type="range" id="time-slider" min="0" max="1" value="0" step="0.01" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-gray-800">
             <span id="slider-label-end"></span>
         </div>
 
