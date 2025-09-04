@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Niigata SHINKA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/base.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
+            font-family: 'Noto Serif JP', serif;
             /* 1層目:グラデーション(右側は透明に)、2層目:背景画像 */
-            background-image: linear-gradient(to right, #000000 1%, #1e242e 35%, transparent 50%), url("assets/Find47_Niigata-A_Gorge_dyed_with_autumn_colors._(Kiyotsu_Gorge,_Tsunan_Town)_-m.jpg");
+            background-image: linear-gradient(to right, rgba(0,0,0,0.8) 1%, rgba(30,36,46,0.7) 35%, transparent 50%), url("assets/Find47_Niigata-A_Gorge_dyed_with_autumn_colors._(Kiyotsu_Gorge,_Tsunan_Town)_-m.jpg");
             
             /* 背景の表示方法を調整 */
             background-size: cover; /* 画面全体を覆うように */
@@ -35,12 +39,12 @@
         .main-title {
             position: absolute;
             top: 50px;
-            left: 30px;
-            font-size: 125px;
+            left: 50px;
+            font-size: 115px;
             font-weight: bold;
             line-height: 1.1;
             letter-spacing: 0.05em; /* tracking-wide */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.7);
             text-align: left;
             color: white;
         }
@@ -62,25 +66,25 @@
 
         .tagline-1 {
             margin-top: 350px;
-            font-size: 60px;
+            font-size: 55px;
             font-weight: bold;
         }
 
         .tagline-2 {
             margin-left: 60px; /* インデントを追加 */
-            font-size: 80px;
+            font-size: 75px;
             font-weight: bold;
         }
 
         .tagline-3 {
             margin-left: 20rem; /* さらにインデントを追加 */
-            font-size: 60px;
+            font-size: 55px;
             font-weight: bold;
         }
 
         .button-group {
             position: absolute;
-            bottom: 6rem; /* 下からの位置を指定 */
+            bottom: 6.5rem; /* 下からの位置を指定 */
             left: 4rem;  /* 左からの位置を指定 */
             display: flex;
             gap: 1.5rem; 
